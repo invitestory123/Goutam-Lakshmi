@@ -9,12 +9,14 @@ import {
   ArrowDown,
   ShareNetwork,
   Check,
-  Heart,
   X,
   Compass,
   Clock,
   Sparkle as SparkleIcon,
-  CaretRight
+  CaretRight,
+  SpeakerHigh,
+  SpeakerSlash,
+  MusicNotes
 } from '@phosphor-icons/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -32,11 +34,12 @@ type EventItem = {
   address: string;
   note: string;
   mapQuery: string;
+  mapUrl?: string;
   icon: string;
   badge?: string;
 };
 
-// Events for Bride
+// Events for Bride (Madhuri)
 const brideEvents: EventItem[] = [
   {
     name: 'Cocktail Evening',
@@ -47,6 +50,7 @@ const brideEvents: EventItem[] = [
     address: 'Near Osman Sagar / Gandipet, Hyderabad',
     note: 'An enchanting lakeside soiree filled with music, cocktails, and laughter under the stars.',
     mapQuery: 'Swargha Lake Retreat',
+    mapUrl: 'https://www.google.com/maps/search/?api=1&query=Swargha+Lake+Retreat',
     icon: '🍸',
     badge: 'Celebration'
   },
@@ -59,11 +63,12 @@ const brideEvents: EventItem[] = [
     address: 'Manikonda, Hyderabad',
     note: 'Sundowner hues, intricate henna drawn with love, and soulful music as celebrations begin.',
     mapQuery: 'Sri Adithya Athena, Manikonda',
+    mapUrl: 'https://www.google.com/maps/search/?api=1&query=Sri+Adithya+Athena+Manikonda',
     icon: '❋',
     badge: 'Bride Ceremony'
   },
   {
-    name: 'Pellikuthuru',
+    name: 'Pellikuthuru Ceremony',
     sideTag: 'bride',
     date: '02 December 2026',
     time: 'At 11:00 AM (Followed by Lunch)',
@@ -71,6 +76,7 @@ const brideEvents: EventItem[] = [
     address: 'Manikonda, Hyderabad',
     note: 'The auspicious turmeric bridal ceremony of blessings, traditional mangala snanam, and maternal love.',
     mapQuery: 'Sri Adithya Athena, Manikonda',
+    mapUrl: 'https://www.google.com/maps/search/?api=1&query=Sri+Adithya+Athena+Manikonda',
     icon: '✿',
     badge: 'Auspicious Ritual'
   },
@@ -80,9 +86,10 @@ const brideEvents: EventItem[] = [
     date: '03 December 2026',
     time: 'At 7:00 PM onwards',
     venue: 'Sacred Green Lawn, Kyra Wellness Resort',
-    address: 'Near Sanghi Temple, Hayathnagar, Telangana',
+    address: 'Kyra Wellness Resort, Near Sanghi Temple, Hayathnagar Mandal, Telangana',
     note: 'A grand twilight evening with family and friends before our holy muhurtham.',
-    mapQuery: 'Kyra Wellness resort, Sanghi Temple',
+    mapQuery: 'Kyra Wellness resort, Sacred Green lawns',
+    mapUrl: 'https://maps.app.goo.gl/HrhAB7UDxjjVnqqg6?g_st=ic',
     icon: '✧',
     badge: 'Reception'
   },
@@ -95,12 +102,13 @@ const brideEvents: EventItem[] = [
     address: 'Sanghi Nagar, Hayathnagar Mandal, Telangana 501511',
     note: 'Jeelakarra Bellam & Mangalsutra dharana — where two souls unite in eternal companionship.',
     mapQuery: 'Sanghi Temple, Hayathnagar',
+    mapUrl: 'https://www.google.com/maps/search/?api=1&query=Sanghi+Temple+Hayathnagar',
     icon: '❧',
     badge: 'Sacred Vows'
   }
 ];
 
-// Events for Groom
+// Events for Groom (Goutam)
 const groomEvents: EventItem[] = [
   {
     name: 'Cocktail Evening',
@@ -111,11 +119,12 @@ const groomEvents: EventItem[] = [
     address: 'Near Osman Sagar / Gandipet, Hyderabad',
     note: 'An enchanting lakeside soiree filled with music, cocktails, and laughter under the stars.',
     mapQuery: 'Swargha Lake Retreat',
+    mapUrl: 'https://www.google.com/maps/search/?api=1&query=Swargha+Lake+Retreat',
     icon: '🍸',
     badge: 'Celebration'
   },
   {
-    name: 'Pellikoduku',
+    name: 'Pellikoduku Ceremony',
     sideTag: 'groom',
     date: '02 December 2026',
     time: 'From 11:00 AM (Followed by Lunch)',
@@ -123,6 +132,7 @@ const groomEvents: EventItem[] = [
     address: 'Manikonda, Hyderabad',
     note: 'The traditional groom preparation ceremony with sacred haldi, blessings, and joyful family festivities.',
     mapQuery: 'Hallmark Palm Breeze Villas, Manikonda',
+    mapUrl: 'https://www.google.com/maps/search/?api=1&query=Hallmark+Palm+Breeze+Villas+Manikonda',
     icon: '✦',
     badge: 'Auspicious Ritual'
   },
@@ -132,9 +142,10 @@ const groomEvents: EventItem[] = [
     date: '03 December 2026',
     time: 'At 7:00 PM onwards',
     venue: 'Sacred Green Lawn, Kyra Wellness Resort',
-    address: 'Near Sanghi Temple, Hayathnagar, Telangana',
+    address: 'Kyra Wellness Resort, Near Sanghi Temple, Hayathnagar Mandal, Telangana',
     note: 'A grand twilight evening with family and friends before our holy muhurtham.',
-    mapQuery: 'Kyra Wellness resort, Sanghi Temple',
+    mapQuery: 'Kyra Wellness resort, Sacred Green lawns',
+    mapUrl: 'https://maps.app.goo.gl/HrhAB7UDxjjVnqqg6?g_st=ic',
     icon: '✧',
     badge: 'Reception'
   },
@@ -147,6 +158,7 @@ const groomEvents: EventItem[] = [
     address: 'Sanghi Nagar, Hayathnagar Mandal, Telangana 501511',
     note: 'Jeelakarra Bellam & Mangalsutra dharana — where two souls unite in eternal companionship.',
     mapQuery: 'Sanghi Temple, Hayathnagar',
+    mapUrl: 'https://www.google.com/maps/search/?api=1&query=Sanghi+Temple+Hayathnagar',
     icon: '❧',
     badge: 'Sacred Vows'
   }
@@ -163,6 +175,7 @@ const allEvents: EventItem[] = [
     address: 'Near Osman Sagar / Gandipet, Hyderabad',
     note: 'An enchanting lakeside soiree filled with music, cocktails, and laughter under the stars.',
     mapQuery: 'Swargha Lake Retreat',
+    mapUrl: 'https://www.google.com/maps/search/?api=1&query=Swargha+Lake+Retreat',
     icon: '🍸',
     badge: 'Celebration'
   },
@@ -175,6 +188,7 @@ const allEvents: EventItem[] = [
     address: 'Manikonda, Hyderabad',
     note: 'Sundowner hues, intricate henna drawn with love, and soulful music as celebrations begin.',
     mapQuery: 'Sri Adithya Athena, Manikonda',
+    mapUrl: 'https://www.google.com/maps/search/?api=1&query=Sri+Adithya+Athena+Manikonda',
     icon: '❋',
     badge: "Bride's Side"
   },
@@ -187,6 +201,7 @@ const allEvents: EventItem[] = [
     address: 'Manikonda, Hyderabad',
     note: 'Traditional Groom preparation ceremony with turmeric, sacred hymns, and feast.',
     mapQuery: 'Hallmark Palm Breeze Villas, Manikonda',
+    mapUrl: 'https://www.google.com/maps/search/?api=1&query=Hallmark+Palm+Breeze+Villas+Manikonda',
     icon: '✦',
     badge: "Groom's Side"
   },
@@ -199,6 +214,7 @@ const allEvents: EventItem[] = [
     address: 'Manikonda, Hyderabad',
     note: 'Traditional Bride preparation ceremony with turmeric, mangala snanam, and blessings.',
     mapQuery: 'Sri Adithya Athena, Manikonda',
+    mapUrl: 'https://www.google.com/maps/search/?api=1&query=Sri+Adithya+Athena+Manikonda',
     icon: '✿',
     badge: "Bride's Side"
   },
@@ -208,9 +224,10 @@ const allEvents: EventItem[] = [
     date: '03 December 2026',
     time: 'At 7:00 PM onwards',
     venue: 'Sacred Green Lawn, Kyra Wellness Resort',
-    address: 'Near Sanghi Temple, Hayathnagar, Telangana',
+    address: 'Kyra Wellness Resort, Near Sanghi Temple, Hayathnagar Mandal, Telangana',
     note: 'A grand twilight evening with family and friends before our holy muhurtham.',
-    mapQuery: 'Kyra Wellness resort, Sanghi Temple',
+    mapQuery: 'Kyra Wellness resort, Sacred Green lawns',
+    mapUrl: 'https://maps.app.goo.gl/HrhAB7UDxjjVnqqg6?g_st=ic',
     icon: '✧',
     badge: 'Reception'
   },
@@ -223,26 +240,27 @@ const allEvents: EventItem[] = [
     address: 'Sanghi Nagar, Hayathnagar Mandal, Telangana 501511',
     note: 'Jeelakarra Bellam & Mangalsutra dharana — where two souls unite in eternal companionship.',
     mapQuery: 'Sanghi Temple, Hayathnagar',
+    mapUrl: 'https://www.google.com/maps/search/?api=1&query=Sanghi+Temple+Hayathnagar',
     icon: '❧',
     badge: 'Sacred Muhurtham'
   }
 ];
 
-// Story 3 Photos Details
+// Couple's Story Photos (Madhuri & Goutam)
 const storyPhotos = [
   {
     id: 'lake',
-    src: '/assets/story-lake.jpg',
+    src: '/assets/goutam-madhuri-lake.jpg',
     title: 'Where Our Journey Sailed',
     subtitle: 'Chapter 01 · In Perfect Stillness',
-    description: 'Surrounded by tranquil waters and towering peaks, two souls found an effortless harmony and a shared dream of a lifetime together.'
+    description: 'Surrounded by tranquil alpine waters and towering mountain peaks, two souls found an effortless harmony and a lifelong promise.'
   },
   {
-    id: 'haldi',
-    src: '/assets/story-haldi-mandap.jpg',
-    title: 'Painted in Sunshine & Joy',
-    subtitle: 'Chapter 02 · Haldi & Pellikoduku / Pellikuthuru',
-    description: 'Turmeric on our cheeks, golden marigold blossoms, and the warmest laughter surrounded by the people who matter the most.'
+    id: 'traditional',
+    src: '/assets/goutam-madhuri-traditional.jpg',
+    title: 'Auspicious Traditions & Golden Blessings',
+    subtitle: 'Chapter 02 · Sacred Weaves & Blessings',
+    description: 'Dressed in sacred silk weaves and fragrant jasmine, lifted in laughter and embraced by the divine blessings of our loving elders.'
   },
   {
     id: 'reception',
@@ -406,7 +424,7 @@ function ScratchDate() {
   );
 }
 
-function Bloom({ onDone }: { onDone: () => void }) {
+function Bloom({ onDone, isBride }: { onDone: () => void; isBride: boolean }) {
   const reduce = useReducedMotion();
   const [open, setOpen] = useState(false);
   return (
@@ -418,7 +436,11 @@ function Bloom({ onDone }: { onDone: () => void }) {
       <div className="welcome-names">
         <small>Together with our families</small>
         <h1>
-          Goutam <i>&</i> Lakshmi
+          {isBride ? (
+            <>Madhuri <i>&</i> Goutam</>
+          ) : (
+            <>Goutam <i>&</i> Madhuri</>
+          )}
         </h1>
         <p>invite you to celebrate their wedding</p>
         <span>04 · 12 · 2026</span>
@@ -449,7 +471,7 @@ function addCalendar() {
     'BEGIN:VEVENT',
     'DTSTART:20261203T232400Z',
     'DTEND:20261204T050000Z',
-    'SUMMARY:Wedding of Goutam & Lakshmi',
+    'SUMMARY:Wedding of Madhuri & Goutam',
     'LOCATION:Sanghi Temple, Hayathnagar, Telangana',
     'DESCRIPTION:Auspicious Wedding Muhurtham at 4:54 AM at Sanghi Temple followed by festivities.',
     'END:VEVENT',
@@ -457,7 +479,7 @@ function addCalendar() {
   ].join('\r\n');
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([body], { type: 'text/calendar' }));
-  a.download = 'goutam-lakshmi-wedding.ics';
+  a.download = 'madhuri-goutam-wedding.ics';
   a.click();
   URL.revokeObjectURL(a.href);
 }
@@ -473,9 +495,12 @@ export function App() {
   const page = useRef<HTMLElement>(null);
 
   // Link side selection: 'bride' | 'groom' | 'all'
-  const [selectedSide, setSelectedSide] = useState<'bride' | 'groom' | 'all'>('groom');
+  // Defaults to 'bride' as specified ("This link should be for Bride")
+  const [selectedSide, setSelectedSide] = useState<'bride' | 'groom' | 'all'>('bride');
   const [copiedLink, setCopiedLink] = useState<string | null>(null);
   const [activePhotoModal, setActivePhotoModal] = useState<(typeof storyPhotos)[0] | null>(null);
+  const [musicPlaying, setMusicPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   // Detect URL parameter or root attribute on load
   useEffect(() => {
@@ -485,12 +510,13 @@ export function App() {
     const path = window.location.pathname.toLowerCase();
     const hash = window.location.hash.toLowerCase();
 
-    if (sideParam === 'bride' || rootSide === 'bride' || path.includes('bride') || hash.includes('bride')) {
-      setSelectedSide('bride');
+    if (sideParam === 'groom' || rootSide === 'groom' || path.includes('groom') || hash.includes('groom')) {
+      setSelectedSide('groom');
     } else if (sideParam === 'all' || hash.includes('all')) {
       setSelectedSide('all');
-    } else if (sideParam === 'groom' || rootSide === 'groom' || path.includes('groom') || hash.includes('groom')) {
-      setSelectedSide('groom');
+    } else {
+      // Default to Bride
+      setSelectedSide('bride');
     }
   }, []);
 
@@ -521,6 +547,33 @@ export function App() {
     });
   };
 
+  // Music toggle handler
+  const toggleMusic = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (audio.paused) {
+      audio.play().then(() => setMusicPlaying(true)).catch(() => {});
+    } else {
+      audio.pause();
+      setMusicPlaying(false);
+    }
+  };
+
+  const handleOpenInvite = () => {
+    // Attempt audio playback on user gesture
+    if (audioRef.current && audioRef.current.paused) {
+      audioRef.current.play().then(() => setMusicPlaying(true)).catch(() => {});
+    }
+    const v = introVideo.current;
+    if (!v) {
+      setEntered(true);
+      return;
+    }
+    v.currentTime = 0;
+    setIntroPlaying(true);
+    void v.play().catch(() => setEntered(true));
+  };
+
   // GSAP animations
   useEffect(() => {
     if (reduce || !entered || !page.current) return;
@@ -549,9 +602,16 @@ export function App() {
 
   // Current active event list based on side
   const currentEvents = selectedSide === 'bride' ? brideEvents : selectedSide === 'groom' ? groomEvents : allEvents;
+  const isBrideTheme = selectedSide === 'bride';
 
   return (
     <main ref={page}>
+      {/* Background Audio */}
+      <audio ref={audioRef} loop preload="auto">
+        <source src="/assets/wedding-music.mp3" type="audio/mpeg" />
+        <source src="/assets/traditional-sitar.ogg" type="audio/ogg" />
+      </audio>
+
       <motion.div className="scroll-progress" style={{ scaleX: scrollYProgress }} />
 
       {/* Floating lanterns */}
@@ -608,13 +668,8 @@ export function App() {
           <div className="garland-edge" />
           {!introPlaying && (
             <Bloom
-              onDone={() => {
-                const v = introVideo.current;
-                if (!v) return;
-                v.currentTime = 0;
-                setIntroPlaying(true);
-                void v.play().catch(() => setEntered(true));
-              }}
+              onDone={handleOpenInvite}
+              isBride={isBrideTheme}
             />
           )}
           {introPlaying && (
@@ -639,21 +694,21 @@ export function App() {
           <div className="side-toggle-group" role="tablist" aria-label="Celebration Side Selector">
             <button
               role="tab"
-              aria-selected={selectedSide === 'groom'}
-              className={'side-tab ' + (selectedSide === 'groom' ? 'active' : '')}
-              onClick={() => handleSideChange('groom')}
-            >
-              <span>🤵 Groom</span>
-              <small>Pellikoduku</small>
-            </button>
-            <button
-              role="tab"
               aria-selected={selectedSide === 'bride'}
               className={'side-tab ' + (selectedSide === 'bride' ? 'active' : '')}
               onClick={() => handleSideChange('bride')}
             >
               <span>👰 Bride</span>
               <small>Pellikuthuru</small>
+            </button>
+            <button
+              role="tab"
+              aria-selected={selectedSide === 'groom'}
+              className={'side-tab ' + (selectedSide === 'groom' ? 'active' : '')}
+              onClick={() => handleSideChange('groom')}
+            >
+              <span>🤵 Groom</span>
+              <small>Pellikoduku</small>
             </button>
             <button
               role="tab"
@@ -668,12 +723,32 @@ export function App() {
         </div>
       </header>
 
+      {/* Floating Background Music Dock */}
+      <div className="floating-music-dock">
+        <button
+          className={'music-dock-btn ' + (musicPlaying ? 'is-playing' : 'is-muted')}
+          onClick={toggleMusic}
+          aria-label={musicPlaying ? 'Mute background wedding music' : 'Play background wedding music'}
+          title={musicPlaying ? 'Mute wedding sitar melody' : 'Play wedding sitar melody'}
+        >
+          <div className="music-disc-icon">
+            <MusicNotes size={17} weight="fill" />
+          </div>
+          <span className="music-dock-text">
+            {musicPlaying ? 'Sitar Music Playing' : 'Play Music'}
+          </span>
+          <div className="music-speaker-state">
+            {musicPlaying ? <SpeakerHigh size={16} weight="bold" /> : <SpeakerSlash size={16} weight="bold" />}
+          </div>
+        </button>
+      </div>
+
       {/* Hero Section */}
       <section className="hero">
         <motion.img
           className="hero-art"
-          src="/assets/story-reception.jpg"
-          alt="Goutam and Lakshmi wedding portrait under temple flower garlands"
+          src="/assets/goutam-madhuri-lake.jpg"
+          alt="Madhuri and Goutam wedding celebration"
           style={{ y: reduce ? 0 : templeY }}
         />
         <div className="hero-scrim" />
@@ -685,7 +760,11 @@ export function App() {
         >
           <p className="blessing">With the divine blessings of our families</p>
           <h1>
-            Goutam <span>&</span> Lakshmi
+            {selectedSide === 'groom' ? (
+              <>Goutam <span>&</span> Madhuri</>
+            ) : (
+              <>Madhuri <span>&</span> Goutam</>
+            )}
           </h1>
           <div className="side-celebration-pill">
             {selectedSide === 'groom' && '✦ Groom’s Celebrations · Pellikoduku ✦'}
@@ -723,13 +802,13 @@ export function App() {
       <ScratchDate />
 
       {/* =========================================================================
-          OUR STORY SECTION WITH 3 PHOTOS BEHIND
+          OUR STORY SECTION WITH COUPLE PHOTOS
           ========================================================================= */}
       <section className="story ornamental">
         {/* Ambient background photo silhouettes */}
         <div className="story-ambient-bg" aria-hidden="true">
-          <div className="ambient-photo p1" style={{ backgroundImage: `url('/assets/story-lake.jpg')` }} />
-          <div className="ambient-photo p2" style={{ backgroundImage: `url('/assets/story-haldi-mandap.jpg')` }} />
+          <div className="ambient-photo p1" style={{ backgroundImage: `url('/assets/goutam-madhuri-lake.jpg')` }} />
+          <div className="ambient-photo p2" style={{ backgroundImage: `url('/assets/goutam-madhuri-traditional.jpg')` }} />
           <div className="ambient-photo p3" style={{ backgroundImage: `url('/assets/story-reception.jpg')` }} />
           <div className="ambient-scrim" />
         </div>
@@ -780,7 +859,9 @@ export function App() {
             </div>
           </div>
 
-          <div className="signature">Goutam & Lakshmi</div>
+          <div className="signature">
+            {selectedSide === 'groom' ? 'Goutam & Madhuri' : 'Madhuri & Goutam'}
+          </div>
         </Reveal>
       </section>
 
@@ -791,16 +872,16 @@ export function App() {
         <div className="floating-diya">◒</div>
         <div className="ceremony-image">
           <img
-            src="/assets/story-haldi-mandap.jpg"
+            src="/assets/goutam-madhuri-traditional.jpg"
             loading="lazy"
-            alt="Goutam and Lakshmi haldi celebration in marigold flower mandap"
+            alt="Madhuri and Goutam in traditional South Indian wedding attire"
           />
         </div>
         <Reveal className="ceremony-caption">
           <p className="script">Turmeric & Tenderness</p>
           <h2>Before Forever Begins</h2>
           <p>
-            Yellow sunshine on our skin, fragrant marigolds in the air, and sacred blessings
+            Yellow sunshine on our skin, sacred silk weaves, and divine blessings
             surrounded by the warmth of family and cherished friends.
           </p>
           <span>Explore our celebration schedule below</span>
@@ -835,14 +916,6 @@ export function App() {
               </span>
               <div className="share-buttons">
                 <button
-                  className={'share-btn ' + (copiedLink === 'groom' ? 'copied' : '')}
-                  onClick={() => copyShareLink('groom')}
-                  title="Copy direct link for Groom's side (Pellikoduku)"
-                >
-                  {copiedLink === 'groom' ? <Check size={16} weight="bold" /> : <ShareNetwork size={16} />}
-                  <span>{copiedLink === 'groom' ? 'Copied Groom Link!' : "Copy Groom's Link (Pellikoduku)"}</span>
-                </button>
-                <button
                   className={'share-btn ' + (copiedLink === 'bride' ? 'copied' : '')}
                   onClick={() => copyShareLink('bride')}
                   title="Copy direct link for Bride's side (Pellikuthuru)"
@@ -850,22 +923,30 @@ export function App() {
                   {copiedLink === 'bride' ? <Check size={16} weight="bold" /> : <ShareNetwork size={16} />}
                   <span>{copiedLink === 'bride' ? 'Copied Bride Link!' : "Copy Bride's Link (Pellikuthuru)"}</span>
                 </button>
+                <button
+                  className={'share-btn ' + (copiedLink === 'groom' ? 'copied' : '')}
+                  onClick={() => copyShareLink('groom')}
+                  title="Copy direct link for Groom's side (Pellikoduku)"
+                >
+                  {copiedLink === 'groom' ? <Check size={16} weight="bold" /> : <ShareNetwork size={16} />}
+                  <span>{copiedLink === 'groom' ? 'Copied Groom Link!' : "Copy Groom's Link (Pellikoduku)"}</span>
+                </button>
               </div>
             </div>
 
             {/* In-page Filter Selector */}
             <div className="festivities-filter-tabs">
               <button
-                className={'filter-tab ' + (selectedSide === 'groom' ? 'active' : '')}
-                onClick={() => handleSideChange('groom')}
-              >
-                🤵 Groom's Side (Pellikoduku)
-              </button>
-              <button
                 className={'filter-tab ' + (selectedSide === 'bride' ? 'active' : '')}
                 onClick={() => handleSideChange('bride')}
               >
                 👰 Bride's Side (Pellikuthuru)
+              </button>
+              <button
+                className={'filter-tab ' + (selectedSide === 'groom' ? 'active' : '')}
+                onClick={() => handleSideChange('groom')}
+              >
+                🤵 Groom's Side (Pellikoduku)
               </button>
               <button
                 className={'filter-tab ' + (selectedSide === 'all' ? 'active' : '')}
@@ -920,7 +1001,7 @@ export function App() {
                   <div className="event-card-actions">
                     <a
                       className="event-map-link"
-                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(e.mapQuery)}`}
+                      href={e.mapUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(e.mapQuery)}`}
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -936,42 +1017,67 @@ export function App() {
         </div>
       </section>
 
-      {/* Main Wedding Venue Section */}
+      {/* Main Wedding Venues Section */}
       <section className="venue ornamental">
         <Reveal>
           <MapPin size={38} weight="thin" />
-          <p className="script">Holy Muhurtham Venue</p>
-          <h2>Sanghi Temple</h2>
+          <p className="script">Celebration Destinations</p>
+          <h2>Our Venues & Directions</h2>
           <p className="venue-full-address">
-            Sanghi Nagar, Hayathnagar Mandal, Hyderabad, Telangana 501511
+            Join us at our sacred venues in Hyderabad & Sanghi Nagar
           </p>
-          <div className="map google-map">
-            <iframe
-              title="Google Map of Sanghi Temple"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps?q=Sanghi%20Temple%2C%20Hayathnagar%2C%20Telangana&z=15&output=embed"
-            />
-            <div className="map-overlay">
-              <span>
-                <MapPin size={19} weight="fill" /> Wedding Muhurtham
-              </span>
-              <b>Sanghi Temple</b>
-              <small>04 December 2026 · 4:54 AM</small>
+
+          <div className="venue-dual-cards">
+            {/* Reception Venue: Kyra Wellness Resort */}
+            <div className="venue-card-item">
+              <span className="venue-tag-badge reception-badge">Pre-Wedding Reception</span>
+              <h3>Sacred Green Lawn</h3>
+              <p className="venue-location-name">Kyra Wellness Resort</p>
+              <p className="venue-location-sub">
+                Near Sanghi Temple, Hayathnagar Mandal, Hyderabad, Telangana
+              </p>
+              <div className="venue-time-badge">
+                <Clock size={14} />
+                <span>03 December 2026 · From 7:00 PM</span>
+              </div>
+              <div className="venue-actions">
+                <a
+                  className="button primary"
+                  href="https://maps.app.goo.gl/HrhAB7UDxjjVnqqg6?g_st=ic"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Compass size={18} /> Open Kyra Resort in Google Maps
+                </a>
+              </div>
             </div>
-          </div>
-          <div className="actions">
-            <a
-              className="button primary"
-              href="https://www.google.com/maps/search/?api=1&query=Sanghi+Temple+Hayathnagar"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Compass size={19} /> Open in Google Maps
-            </a>
-            <button className="button secondary" onClick={addCalendar}>
-              <CalendarBlank size={19} /> Add to Calendar
-            </button>
+
+            {/* Wedding Muhurtham: Sanghi Temple */}
+            <div className="venue-card-item featured-muhurtham-card">
+              <span className="venue-tag-badge muhurtham-badge">Sacred Wedding Muhurtham</span>
+              <h3>Sanghi Temple</h3>
+              <p className="venue-location-name">Hilltop Temple Complex</p>
+              <p className="venue-location-sub">
+                Sanghi Nagar, Hayathnagar Mandal, Hyderabad, Telangana 501511
+              </p>
+              <div className="venue-time-badge">
+                <Clock size={14} />
+                <span>04 December 2026 · At 4:54 AM (Brahma Muhurtham)</span>
+              </div>
+              <div className="venue-actions">
+                <a
+                  className="button primary"
+                  href="https://www.google.com/maps/search/?api=1&query=Sanghi+Temple+Hayathnagar"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Compass size={18} /> Open Sanghi Temple in Maps
+                </a>
+                <button className="button secondary" onClick={addCalendar}>
+                  <CalendarBlank size={18} /> Add to Calendar
+                </button>
+              </div>
+            </div>
           </div>
         </Reveal>
       </section>
@@ -979,16 +1085,20 @@ export function App() {
       {/* Footer Section */}
       <footer>
         <img
-          src="/assets/story-reception.jpg"
+          src="/assets/goutam-madhuri-traditional.jpg"
           loading="lazy"
-          alt="Goutam and Lakshmi wedding portrait"
+          alt="Madhuri and Goutam wedding portrait"
         />
         <div className="footer-overlay" />
         <Reveal className="footer-copy">
           <Sparkle size={28} weight="thin" />
           <p>We cannot wait to celebrate with you</p>
           <h2>
-            Goutam <i>&</i> Lakshmi
+            {selectedSide === 'groom' ? (
+              <>Goutam <i>&</i> Madhuri</>
+            ) : (
+              <>Madhuri <i>&</i> Goutam</>
+            )}
           </h2>
           <span>04 December 2026 · Sanghi Temple, Telangana</span>
         </Reveal>
