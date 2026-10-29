@@ -899,10 +899,10 @@ footer h2 {
   margin: 0 auto 46px;
 }
 
-/* 3 Photos Showcase Grid */
+/* Couple Photos Showcase Grid */
 .story-photos-container {
   margin: 40px auto;
-  max-width: 920px;
+  max-width: 1100px;
 }
 
 .story-photos-header {
@@ -935,13 +935,20 @@ footer h2 {
 .story-photos-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 24px;
+  gap: 20px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 580px) {
   .story-photos-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 22px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (min-width: 980px) {
+  .story-photos-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
   }
 }
 
@@ -1059,54 +1066,91 @@ footer h2 {
    CEREMONY MOMENT
    ========================================================================== */
 .ceremony-moment {
-  padding: 0;
-  background: #364219;
+  position: relative;
+  padding: 85px 24px 70px;
+  background: radial-gradient(ellipse at 50% 30%, #2f2113 0%, #150d06 72%, #0d0703 100%);
   color: var(--ivory);
   overflow: hidden;
-}
-
-.ceremony-image {
-  height: 72svh;
-  min-height: 520px;
-  overflow: hidden;
-}
-
-.ceremony-image img {
-  width: 100%;
-  height: 115%;
-  object-fit: cover;
-  object-position: center 30%;
-  will-change: transform;
-}
-
-.ceremony-caption {
-  position: relative;
-  margin-top: -155px;
-  padding: 150px 24px 60px;
-  background: linear-gradient(0deg, #364219 0%, #364219 55%, transparent 100%);
   text-align: center;
 }
 
-.ceremony-caption h2 {
-  font: 42px / 1.05 Italiana, Georgia, serif;
-  margin: 8px 0 18px;
-  color: var(--ivory);
+.ceremony-header {
+  max-width: 640px;
+  margin: 0 auto 36px;
+  position: relative;
+  z-index: 2;
 }
 
-.ceremony-caption > p:not(.script) {
-  max-width: 480px;
+.ceremony-header .script {
+  font: 34px Parisienne, cursive;
+  color: #f7d287;
+  margin: 0 0 6px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+.ceremony-header h2 {
+  font: clamp(34px, 5.5vw, 48px) / 1.08 Italiana, Georgia, serif;
+  margin: 6px 0 14px;
+  color: #fff9ee;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
+}
+
+.ceremony-lead {
+  max-width: 520px;
   margin: 0 auto;
-  line-height: 1.75;
-  color: #f7ecd7;
+  line-height: 1.7;
+  font-size: 15px;
+  color: #eed6b0;
 }
 
-.ceremony-caption span {
+.ceremony-arch-wrapper {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ceremony-arch-portrait {
+  position: relative;
+  width: min(88vw, 420px);
+  aspect-ratio: 682 / 1024;
+  margin: 0 auto;
+  border-radius: 210px 210px 20px 20px;
+  overflow: hidden;
+  box-shadow: 0 25px 65px rgba(0, 0, 0, 0.85), 0 0 50px rgba(212, 175, 55, 0.22);
+  border: 2px solid rgba(228, 181, 84, 0.7);
+  background: #000;
+}
+
+.ceremony-arch-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center top;
   display: block;
-  margin-top: 25px;
-  font-size: 9.5px;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ceremony-arch-portrait:hover img {
+  transform: scale(1.03);
+}
+
+.ceremony-subcue {
+  margin-top: 24px;
+}
+
+.ceremony-subcue span {
+  display: inline-block;
+  font-size: 10.5px;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.22em;
   color: #edd498;
+  padding: 6px 18px;
+  border-radius: 999px;
+  background: rgba(228, 181, 84, 0.12);
+  border: 1px solid rgba(228, 181, 84, 0.35);
+  backdrop-filter: blur(8px);
 }
 
 .floating-glass {
@@ -1725,56 +1769,102 @@ footer h2 {
 /* ==========================================================================
    FOOTER
    ========================================================================== */
-footer {
+.footer-section {
   position: relative;
-  height: 560px;
-  overflow: hidden;
-  display: grid;
-  place-items: end center;
-  text-align: center;
+  padding: 85px 24px 60px;
+  background: radial-gradient(ellipse at 50% 35%, #2a1b10 0%, #120a05 70%, #0a0502 100%);
   color: var(--ivory);
+  overflow: hidden;
+  text-align: center;
 }
 
-footer > img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 30%;
-}
-
-.footer-overlay {
+.footer-ambient-backdrop {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(58, 33, 16, 0.1), rgba(48, 27, 12, 0.4) 40%, rgba(35, 19, 10, 0.94) 95%);
+  background: radial-gradient(circle at 50% 25%, rgba(212, 175, 55, 0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.footer-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-portrait-wrapper {
+  margin-bottom: 28px;
+}
+
+.footer-portrait-arch {
+  position: relative;
+  width: min(80vw, 320px);
+  aspect-ratio: 682 / 1024;
+  margin: 0 auto;
+  border-radius: 160px 160px 18px 18px;
+  overflow: hidden;
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.8), 0 0 40px rgba(212, 175, 55, 0.2);
+  border: 2px solid rgba(228, 181, 84, 0.65);
+  background: #000;
+}
+
+.footer-portrait-arch img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center top;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.footer-portrait-arch:hover img {
+  transform: scale(1.03);
 }
 
 .footer-copy {
-  position: relative;
-  padding: 50px 24px;
-  width: 100%;
-  text-shadow: 0 2px 7px #321;
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(10, 5, 2, 0.8);
 }
 
-.footer-copy p {
-  font: 26px Parisienne, cursive;
+.footer-script {
+  font: 28px Parisienne, cursive;
   color: #f7e6ca;
-  margin: 8px 0;
+  margin: 10px 0 6px;
 }
 
-.footer-copy h2 {
-  font-size: 48px;
-  margin: 10px 0;
-  color: #fff7eb;
+.footer-names {
+  font: clamp(40px, 8vw, 54px) / 1.05 Italiana, Georgia, serif;
+  margin: 6px 0 12px;
+  color: #fff8ed;
 }
 
-.footer-copy h2 i {
+.footer-names i {
   color: #efc379;
   font-weight: 400;
 }
 
-.footer-copy span {
-  font-size: 11.5px;
+.footer-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #d4af37;
+  font-size: 14px;
+  margin: 14px 0 10px;
+}
+
+.footer-rule span {
+  width: 45px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.65), transparent);
+}
+
+.footer-venue-tag {
+  display: inline-block;
+  font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.18em;
   color: #eed6ac;

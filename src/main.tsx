@@ -249,25 +249,32 @@ const allEvents: EventItem[] = [
 // Couple's Story Photos (Madhuri & Goutam)
 const storyPhotos = [
   {
+    id: 'paris',
+    src: '/assets/goutam-madhuri-paris.jpg',
+    title: 'Where Magic Began',
+    subtitle: 'Chapter 01 · Paris Romance',
+    description: 'Beneath the golden illumination of the Eiffel Tower, wrapped in the warmth of winter, our dreams found each other in the city of love.'
+  },
+  {
     id: 'lake',
     src: '/assets/goutam-madhuri-lake.jpg',
     title: 'Where Our Journey Sailed',
-    subtitle: 'Chapter 01 · In Perfect Stillness',
-    description: 'Surrounded by tranquil alpine waters and towering mountain peaks, two souls found an effortless harmony and a lifelong promise.'
+    subtitle: 'Chapter 02 · In Perfect Stillness',
+    description: 'Surrounded by tranquil alpine waters and towering Dolomite peaks, drifting gently in effortless harmony and quiet wonder.'
+  },
+  {
+    id: 'ring',
+    src: '/assets/goutam-madhuri-ring.jpg',
+    title: 'The Forever Promise',
+    subtitle: 'Chapter 03 · Hand in Hand',
+    description: 'A sparkling diamond reflecting sunlight over emerald waters, locked fingers, and a heartfelt vow to walk through life together.'
   },
   {
     id: 'traditional',
     src: '/assets/goutam-madhuri-traditional.jpg',
-    title: 'Auspicious Traditions & Golden Blessings',
-    subtitle: 'Chapter 02 · Sacred Weaves & Blessings',
-    description: 'Dressed in sacred silk weaves and fragrant jasmine, lifted in laughter and embraced by the divine blessings of our loving elders.'
-  },
-  {
-    id: 'reception',
-    src: '/assets/story-reception.jpg',
-    title: 'Two Paths, One Sacred Forever',
-    subtitle: 'Chapter 03 · The Royal Promise',
-    description: 'Under the glow of temple lanterns and sacred blessings, stepping forward hand-in-hand into our eternal new beginning.'
+    title: 'Auspicious Traditions & Blessings',
+    subtitle: 'Chapter 04 · Sacred Weaves & Muhurtham',
+    description: 'Dressed in sacred silk weaves and fragrant jasmine, embraced by the warmth of family laughter and eternal Vedic blessings.'
   }
 ];
 
@@ -585,7 +592,7 @@ export function App() {
         gsap.fromTo(el, { opacity: 0, x: i % 2 ? -35 : 35 }, { opacity: 1, x: 0, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%', end: 'top 62%', scrub: 0.8 } })
       );
       gsap.fromTo('.story-photo-card', { opacity: 0, y: 40, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, stagger: 0.18, ease: 'power2.out', scrollTrigger: { trigger: '.story-photos-grid', start: 'top 82%' } });
-      gsap.fromTo('.ceremony-image img', { scale: 1.15, yPercent: -4 }, { scale: 1, yPercent: 4, ease: 'none', scrollTrigger: { trigger: '.ceremony-image', start: 'top bottom', end: 'bottom top', scrub: 1 } });
+      gsap.fromTo('.ceremony-arch-portrait', { opacity: 0, y: 30, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, duration: 0.9, ease: 'power2.out', scrollTrigger: { trigger: '.ceremony-moment', start: 'top 75%' } });
       gsap.utils.toArray<HTMLElement>('.atmos-lantern').forEach((el, i) => {
         const depth = Number(el.dataset.depth || 0.4);
         gsap.to(el, {
@@ -808,8 +815,8 @@ export function App() {
         {/* Ambient background photo silhouettes */}
         <div className="story-ambient-bg" aria-hidden="true">
           <div className="ambient-photo p1" style={{ backgroundImage: `url('/assets/goutam-madhuri-lake.jpg')` }} />
-          <div className="ambient-photo p2" style={{ backgroundImage: `url('/assets/goutam-madhuri-traditional.jpg')` }} />
-          <div className="ambient-photo p3" style={{ backgroundImage: `url('/assets/story-reception.jpg')` }} />
+          <div className="ambient-photo p2" style={{ backgroundImage: `url('/assets/goutam-madhuri-ring.jpg')` }} />
+          <div className="ambient-photo p3" style={{ backgroundImage: `url('/assets/goutam-madhuri-paris.jpg')` }} />
           <div className="ambient-scrim" />
         </div>
 
@@ -870,22 +877,28 @@ export function App() {
         <div className="floating-glass lotus-one">✿</div>
         <div className="floating-glass lotus-two">❀</div>
         <div className="floating-diya">◒</div>
-        <div className="ceremony-image">
-          <img
-            src="/assets/goutam-madhuri-traditional.jpg"
-            loading="lazy"
-            alt="Madhuri and Goutam in traditional South Indian wedding attire"
-          />
-        </div>
-        <Reveal className="ceremony-caption">
+
+        <Reveal className="ceremony-header">
           <p className="script">Turmeric & Tenderness</p>
           <h2>Before Forever Begins</h2>
-          <p>
+          <p className="ceremony-lead">
             Yellow sunshine on our skin, sacred silk weaves, and divine blessings
             surrounded by the warmth of family and cherished friends.
           </p>
-          <span>Explore our celebration schedule below</span>
         </Reveal>
+
+        <div className="ceremony-arch-wrapper">
+          <div className="ceremony-arch-portrait">
+            <img
+              src="/assets/goutam-madhuri-traditional.jpg"
+              loading="lazy"
+              alt="Madhuri and Goutam in traditional South Indian wedding attire"
+            />
+          </div>
+          <p className="ceremony-subcue">
+            <span>✦ Auspicious Pellikuthuru & Pellikoduku ✦</span>
+          </p>
+        </div>
       </section>
 
       {/* =========================================================================
@@ -1083,25 +1096,35 @@ export function App() {
       </section>
 
       {/* Footer Section */}
-      <footer>
-        <img
-          src="/assets/goutam-madhuri-traditional.jpg"
-          loading="lazy"
-          alt="Madhuri and Goutam wedding portrait"
-        />
-        <div className="footer-overlay" />
-        <Reveal className="footer-copy">
-          <Sparkle size={28} weight="thin" />
-          <p>We cannot wait to celebrate with you</p>
-          <h2>
-            {selectedSide === 'groom' ? (
-              <>Goutam <i>&</i> Madhuri</>
-            ) : (
-              <>Madhuri <i>&</i> Goutam</>
-            )}
-          </h2>
-          <span>04 December 2026 · Sanghi Temple, Telangana</span>
-        </Reveal>
+      <footer className="footer-section">
+        <div className="footer-ambient-backdrop" />
+        <div className="footer-inner">
+          <Reveal className="footer-portrait-wrapper">
+            <div className="footer-portrait-arch">
+              <img
+                src="/assets/goutam-madhuri-traditional.jpg"
+                loading="lazy"
+                alt="Madhuri and Goutam wedding portrait"
+              />
+            </div>
+          </Reveal>
+
+          <Reveal className="footer-copy">
+            <Sparkle size={28} weight="thin" />
+            <p className="footer-script">We cannot wait to celebrate with you</p>
+            <h2 className="footer-names">
+              {selectedSide === 'groom' ? (
+                <>Goutam <i>&</i> Madhuri</>
+              ) : (
+                <>Madhuri <i>&</i> Goutam</>
+              )}
+            </h2>
+            <div className="footer-rule">
+              <span /> 𑁍 <span />
+            </div>
+            <span className="footer-venue-tag">04 December 2026 · Sanghi Temple, Telangana</span>
+          </Reveal>
+        </div>
       </footer>
 
       {/* Lightbox Photo Modal */}
